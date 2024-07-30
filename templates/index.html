@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}"/>
+</head>
+<body>
+    <div class="">
+        <nav class="nav-bar">
+            <img src="{{url_for('static',filename='/images/logo.png')}}" alt="logo" class="logo"/>
+        </nav>
+        <form method="POST" action="/predict" class="review-form">
+            <label for="review" class="">Enter your review:</label>
+            <input type="text" name="review" id="review" required class="input-box">
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        {% if prediction %}
+            <div class="footer">
+                <p>Thank you for giving your valuable feedback!</p>
+                <p>Have a gread day ahead!✨</p>
+                <a href="{{ url_for('analytics') }}">View Analytics</a> 
+            </div>
+        {% endif %}
+</body>
+</html>

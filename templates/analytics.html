@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Analytics</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="nav-bar">
+            <img src="{{url_for('static',filename='/images/logo.png')}}" alt="logo" class="logo"/>
+        </nav>
+        <h2 class="a-text"> Review Analytics</h2>
+        <div id="chart-container">
+            <canvas id="sentimentChart"></canvas>
+        </div>
+        <script>
+            const ctx = document.getElementById('sentimentChart').getContext('2d');
+            const sentimentChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Positive Reviews', 'Negative Reviews'],
+                    datasets: [{
+                        data: [{{ positive }}, {{ negative }}],
+                        backgroundColor: ['#CC9D2F', '#5B0017'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    family:'Imbue',
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                        },
+                        title: {
+                            display: true,
+                            text: 'Review Analysis',
+                            color:'white',
+                            font: {
+                                family:'Imbue',
+                                size: 18,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+        <div class="footer">
+            <p>Total Reviews: {{ total }}</p>
+            <a href="{{ url_for('home') }}">Back to Home</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Review</th>
+                    <th>Sentiment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                <tr>
+                    <td>{{ review.Review }}</td>
+                    <td>{{ review.Sentiment }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
