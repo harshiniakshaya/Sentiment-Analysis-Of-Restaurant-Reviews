@@ -1,0 +1,8 @@
+Initial Dataset = 1000
+Accuracy using Naive Bayes Classifier = 71%
+
+Augmented Dataset = 10000
+Accuracy using:
+    Naive Bayes Classifier = 89%
+    Logistic Regression = 97%
+    
